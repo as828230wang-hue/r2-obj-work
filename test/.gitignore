@@ -1,0 +1,14 @@
+# deps
+node_modules
+bun.lock
+
+# build output
+.wrangler
+dist
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
+
+# editor / os
+.DS_Store
+*.log

@@ -1,0 +1,26 @@
+name = "r2-obj-work-dev"
+main = "src/index.ts"
+compatibility_date = "2025-05-01"
+
+# ── D1: isolated dev database (separate from prod hkjc). ──────────────────
+[[d1_databases]]
+binding = "DB"
+database_name = "hkjc-dev"
+database_id = "e837e24b-97e3-4b17-8792-d7886494f7b2"
+migrations_dir = "migrations"
+
+# ── R2: isolated dev bucket (separate from prod hkjc). ────────────────────
+[[r2_buckets]]
+binding = "BUCKET"
+bucket_name = "hkjc-dev"
+
+# ── Static assets (API doc served here) ───────────────────────────────────
+[assets]
+directory = "./assets"
+binding = "ASSETS"
+
+[vars]
+ADMIN_USERNAME = "admin"
+
+[dev]
+port = 8788

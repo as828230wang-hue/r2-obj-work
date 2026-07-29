@@ -1,0 +1,25 @@
+{
+  "name": "r2-obj-work-dev",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --port 8788",
+    "deploy": "wrangler deploy",
+    "types": "wrangler types",
+    "db:apply": "wrangler d1 migrations apply hkjc-dev --local",
+    "db:apply:prod": "wrangler d1 migrations apply hkjc-dev --remote",
+    "db:create:prod": "echo \"hkjc-dev D1 exists (e837e24b-97e3-4b17-8792-d7886494f7b2)\""
+  },
+  "dependencies": {
+    "hono": "^4.12.32",
+    "marked": "^18.0.7"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260729.1",
+    "wrangler": "^4.115.0"
+  },
+  "peerDependencies": {
+    "typescript": "^7.0.2"
+  }
+}

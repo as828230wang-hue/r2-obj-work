@@ -1,0 +1,26 @@
+name: Deploy (prod)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+
+      # The Worker lives in dev/ (wrangler.prod.toml binds prod hkjc resources)
+      - name: Install
+        working-directory: dev
+        run: bun install --frozen-lockfile
+
+      - name: Deploy to Cloudflare
+        working-directory: dev
+        run: bunx wrangler deploy -c wrangler.prod.toml
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: cb827a3099c66aa300fb16559c5b8c41

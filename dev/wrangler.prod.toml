@@ -1,0 +1,33 @@
+# Production deployment config.
+# Bindings point at the PROD hkjc resources (separate from dev/ hkjc-dev).
+# Deploy with:  bunx wrangler deploy -c wrangler.prod.toml
+name = "r2-obj-work"
+main = "src/index.ts"
+compatibility_date = "2025-05-01"
+
+# ── D1: prod hkjc database ────────────────────────────────────────────────
+[[d1_databases]]
+binding = "DB"
+database_name = "hkjc"
+database_id = "d92feeff-e623-4348-b9cc-61d082505689"
+migrations_dir = "migrations"
+
+# ── R2: prod hkjc bucket ──────────────────────────────────────────────────
+[[r2_buckets]]
+binding = "BUCKET"
+bucket_name = "hkjc"
+
+# ── Static assets (API doc) ───────────────────────────────────────────────
+[assets]
+directory = "./assets"
+binding = "ASSETS"
+
+[vars]
+ADMIN_USERNAME = "admin"
+
+# ── Custom domain ─────────────────────────────────────────────────────────
+# NOTE: requires `kdns.fr` to be added as a Cloudflare zone first.
+# Until then, deploy will serve on the *.workers.dev URL.
+routes = [
+  { pattern = "football.data.deploys.kdns.fr", custom_domain = true }
+]

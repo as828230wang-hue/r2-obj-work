@@ -1,0 +1,22 @@
+name = "r2-obj-work"
+main = "src/index.ts"
+compatibility_date = "2025-05-01"
+
+# ── D1: structured data (admin users, API tokens) ─────────────────────────
+# For remote deploy run: wrangler d1 create r2_obj_work_db
+# then replace database_id below with the real id (local dev works with any UUID).
+[[d1_databases]]
+binding = "DB"
+database_name = "r2_obj_work_db"
+database_id = "b1e3e63c-167b-48a0-ad78-1191ed52cca0"
+migrations_dir = "migrations"
+
+# ── R2: object / blob storage ──────────────────────────────────────────────
+[[r2_buckets]]
+binding = "BUCKET"
+bucket_name = "hkjc"
+
+[vars]
+# Default bootstrap admin username; password lives in .dev.vars (local) or
+# `wrangler secret put ADMIN_PASSWORD` (remote).
+ADMIN_USERNAME = "admin"
