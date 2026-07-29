@@ -25,9 +25,9 @@ binding = "ASSETS"
 [vars]
 ADMIN_USERNAME = "admin"
 
-# ── Custom domain ─────────────────────────────────────────────────────────
-# NOTE: requires `kdns.fr` to be added as a Cloudflare zone first.
-# Until then, deploy will serve on the *.workers.dev URL.
-routes = [
-  { pattern = "football.data.deploys.kdns.fr", custom_domain = true }
-]
+# ── Custom domain (deferred) ──────────────────────────────────────────────
+# `football.data.deploys.kdns.fr` lives on the `kdns.fr` zone, which is NOT
+# currently a Cloudflare zone — so a `custom_domain` route cannot be created
+# via wrangler. Re-add the `routes = [...]` block once that zone is hosted on
+# Cloudflare (or alias the hostname to this workers.dev URL via external CNAME).
+workers_dev = true
